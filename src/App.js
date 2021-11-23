@@ -6,6 +6,8 @@ import { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom'
 
 // Components
+import LoginForm from './Pages/LoginForm'
+import SignUpForm from './Pages/SignUpForm'
 import OptionDisplay from './Pages/OptionDisplay';
 import Categories from './Pages/Categories';
 import About from './Pages/About';
@@ -30,6 +32,7 @@ const parseString = (string) => {
 function App() {
 
   // States
+  const [userData, setUserData] = useState([])
   const [restaurantData, setRestaurantData] = useState([])
   const [currentRestaurants, setCurrentRestaurants] = useState()
 
@@ -54,8 +57,30 @@ function App() {
     return finalizedCuisineArray
   }
 
+  // User CRUD
+  const getUsers = () => {
+    fetch('http://localhost:4000/users', {
+        method: 'GET'}
+        )
+        .then((res) => res.json())
+        .then((data) => {setUserData(data)})
+  }
 
-  // CRUD
+  const postUser = (restaurant, setPlace) => {
+    fetch('http://localhost:4000/users', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(restaurant)
+        })
+        .then(response => response.json())
+        .then(data => setPlace({ name: "", zipcode: ""}))
+        // .then(data => {getRestaurants()})
+        
+  }
+
+  // Restaurant CRUD
   const getRestaurants = () => {
     fetch('http://localhost:4000/restaurants', {
         method: 'GET'}
@@ -104,14 +129,25 @@ function App() {
     <div className="App">
       <nav>
         <ul className="navbar">
-          <li><Link to="/" >Home</Link></li>
+          <li><Link to="/home" >Home</Link></li>
           <li><Link to="/favorites" >Favorites</Link></li>
           <li><Link to="/categories">Categories</Link> </li>
         </ul>
       </nav>
       <Routes>
+        {/* Login Form */}
+        <Route path="/"element={<LoginForm
+        userData={userData}
+        getUsers={getUsers}
+        />}/>
+
+        <Route path="/register"element={<SignUpForm
+        userData={userData}
+        getUsers={getUsers}
+        />}/>
+        
         {/* Home */}
-        <Route path="/"element={<Home 
+        <Route path="/home"element={<Home 
         restaurantData={restaurantData} 
         setRestaurantData={setRestaurantData} 
         // CRUD Methods
