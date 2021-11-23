@@ -27,7 +27,7 @@ const RestaurantDisplay = (props) => {
 
     return(
         <>
-        <h1>Displayed!</h1>
+        <h3>Here are your favorites.  Feel free to make any changes.</h3>
         <div class="place-card__wrap--outer">
                 <div class="place-card__wrap--inner">
                     {restaurantMap}

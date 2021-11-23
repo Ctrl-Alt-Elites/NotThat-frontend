@@ -21,7 +21,9 @@ const RestaurantForm = (props) => {
         // creating an info object to post to the database
         let info = {name: place.name, zipcode: place.zipcode, cuisines: [{name: cuisines}]}
         
-        props.postRestaurant(info, setPlace)
+        if (cuisines !== '' && place.name !== '' && place.zipcode !== '') {
+            props.postRestaurant(info, setPlace)
+        }
     }
 
      // handling the input changes
@@ -43,6 +45,7 @@ const RestaurantForm = (props) => {
     }
 
     return (
+    <div className="restaurant-container">
         <div className="restaurant-form">
             <form onSubmit={handleSubmit}>
                 <input className="input-field" onChange={handleChange} type="text" name="name" placeholder="Restaurant" value={place.name}/>
@@ -51,6 +54,7 @@ const RestaurantForm = (props) => {
                 <button className="submit-button" type="submit">Submit</button>
             </form>
         </div>
+    </div>
     )
 
 }

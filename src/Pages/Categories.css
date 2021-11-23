@@ -6,5 +6,18 @@
 }
 
 .categories button {
-    margin: 0px 20px;
+    margin: 10px;
+}
+
+.submit {
+    padding: 10px 15px;
+    margin-top: 10px;
+}
+
+@media only screen  and (min-width: 724px) {
+    .categories {
+        width: 600px;
+        margin: 0 auto;
+    }    
+
 }

@@ -134,6 +134,8 @@ function App() {
           <li><Link to="/categories">Categories</Link> </li>
         </ul>
       </nav>
+      <h1>Not That</h1>
+      
       <Routes>
         {/* Login Form */}
         <Route path="/"element={<LoginForm

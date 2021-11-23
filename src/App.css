@@ -19,6 +19,10 @@ nav {
     transition: 0.25s;
 }
 
+ul{
+    padding-inline-start: 0;
+}
+
 .navbar a:hover {
     filter: drop-shadow(0 0 0.5rem #ffffff);
     transition: 0.5s;
@@ -31,10 +35,11 @@ input:focus {
 .input-field {
     background-color: #232323;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     text-align: center;
     color: white;
-    font-size: 150%;
+    margin: 0 10%;
+    /* font-size: 150%; */
 }
 
 .submit-button {
@@ -43,8 +48,9 @@ input:focus {
     background-color: #dc3636;
     filter: drop-shadow(0 0 0.5rem #dc3636);
     color: white;
-    font-size: 150%;
+    font-size: 1.2em;
     padding: 10px 0px;
+    margin: 0 10%;
 }
 
 ::-webkit-input-placeholder {
@@ -54,4 +60,10 @@ input:focus {
 
 input:focus::-webkit-input-placeholder {
     color: transparent;
+}
+
+h3 {
+    color: white;
+    font-size: 1em;
+    padding: 0 10%;
 }

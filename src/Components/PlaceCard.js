@@ -1,12 +1,16 @@
 // React
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 // Styling
 import './PlaceCard.css'
 
 // Functions
 const parseString = (string) => {
+    if(!string){
+        return []
+    }else{
     return string.split(/[ ,]+/);  
+    }
 }
 
 // Component
@@ -17,6 +21,7 @@ const PlaceCard = (props) => {
     const [info, setInfo] = useState({ name: "", zipcode: ""})
     const [cuisines, setCuisines] = useState('')
     const id = props.value._id
+    
 
     // Functions
     const update = () => {
@@ -46,7 +51,8 @@ const PlaceCard = (props) => {
     const handleCuisineChange = (e) => {
         const value = e.target.value
         const foodArray = parseString(value)
-        setCuisines(value)
+        console.log(value)
+        if (value !== "" || value !== " ") {setCuisines(value)}
     }
 
     let CuisineArray = parseString(props.value.cuisines[0].name)
@@ -58,6 +64,12 @@ const PlaceCard = (props) => {
         )
     })
 
+    useEffect(() => {
+        setInfo({name: props.value.name, zipcode: props.value.zipcode})
+        setCuisines(props.value.cuisines[0].name)
+    }, [])
+
+
     return (
         
         <div class="place-card">
@@ -65,15 +77,15 @@ const PlaceCard = (props) => {
             {updating ? 
             <form onSubmit={finalizeUpdate}>
                 <input className="place-card-input-field" onChange={handleEdit} name="name" value={info.name} type="text" placeholder="Restaurant" />
-                <input className="place-card-input-field" onChange={handleEdit} name="zipcode" value={info.zipcode} type="text" placeholder="Zipcode" />
-                <input className="place-card-input-field" onChange={handleCuisineChange} name="cuisines" value={cuisines.value} type="text"  placeholder="Cuisines"/>
-                <button type="submit">Save</button> 
+                <input className="place-card-input-field" onChange={handleEdit} name="zipcode" value={info.zipcode} type="text" placeholder="Location" />
+                <input className="place-card-input-field" onChange={handleCuisineChange} name="cuisines" value={cuisines} type="text"  placeholder="Cuisines"/>
+                <button type="submit">Save</button>
             </form> : 
             ''
             }
-            {!updating ? <div>Restaurant: {props.value.name}</div> : ''}
-            {!updating ? <div>Zipcode: {props.value.zipcode}</div> : ''}
-            {!updating ? <div class="flexible">Cuisines: <ul className="cuisine-list"> {CuisineItems} </ul></div> : <div class="flexible"></div>}
+            {!updating ? <div className="restaurant-name">{props.value.name}</div> : ''}
+            {!updating ? <div className="location">{props.value.zipcode}</div> : ''}
+            {!updating ? <div className="flexible"><ul className="cuisine-list">{CuisineItems} </ul></div> : <div class="flexible"></div>}
             <div>{updating ? "" : <button className="update-button" onClick={update}>Update</button>} <button onClick={props.handleDelete}>Delete</button></div>
         </div>
 

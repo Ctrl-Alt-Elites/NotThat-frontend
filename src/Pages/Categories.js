@@ -165,14 +165,14 @@ export default function Categories(props) {
 
     return (
         <div>
+          <h3>click what you don't want and hit submit.</h3>
           <div className="categories">
             {display}
           </div>
-
           <Link to="/options" > 
-            <button onClick={compileChoices} className="submit-button">
-              Submit
-            </button>
+          <button onClick={compileChoices} className="submit-button submit">
+            Submit
+          </button>
           </Link>
         </div>
     )
