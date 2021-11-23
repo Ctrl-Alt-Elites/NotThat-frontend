@@ -75,7 +75,7 @@ function App() {
             body: JSON.stringify(restaurant)
         })
         .then(response => response.json())
-        .then(data => setPlace({ name: "", zipcode: ""}))
+        .then(data => setPlace({ name: "", passowrd: ""}))
         // .then(data => {getRestaurants()})
         
   }
@@ -141,6 +141,7 @@ function App() {
         <Route path="/"element={<LoginForm
         userData={userData}
         getUsers={getUsers}
+        postUser={postUser}
         />}/>
 
         <Route path="/register"element={<SignUpForm
